@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        
+        /* Tambahkan gaya CSS di sini */
+        .add-button {
+            background-color: rgb(13, 188, 232);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .container {
+    max-width: 400px;
+    margin: 50px auto; /* Tengah secara horizontal dan memiliki margin atas dan bawah sebesar 50px */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Todo List</h1>
+            <input type="text" v-model="newTask" @keyup.enter="addTask" placeholder="Add new task...">
+            <button class="add-button" @click="addTask">&#43; Add Task</button>
+            <ul>
+                <li v-for="(task, index) in tasks" :key="index">
+                    <input type="text" v-model="task.name" @change="updateTask(index)">
+                    <button class="delete-button" @click="deleteTask(index)">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                newTask: '',
+                tasks: []
+            },
+            methods: {
+                addTask() {
+                    if (this.newTask.trim() !== '') {
+                        this.tasks.push({ name: this.newTask.trim() });
+                        this.newTask = '';
+                    }
+                },
+                updateTask(index) {
+                    // You can add more features to update tasks here.
+                },
+                deleteTask(index) {
+                    this.tasks.splice(index, 1);
+                }
+            }
+        });
+    </script>
+    <div id="app" class="container">
+        <!-- Konten aplikasi Vue.js -->
+    </div>
+    
+</body>
+</html>
